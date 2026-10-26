@@ -31,3 +31,4 @@ data/
 npm-debug.log*
 .vercel
 tsconfig.tsbuildinfo
+*.tar.gz
