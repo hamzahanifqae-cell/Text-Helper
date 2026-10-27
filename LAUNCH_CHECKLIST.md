@@ -1,26 +1,22 @@
 # Launch checklist
 
-Concise list of what to do, in order, before pointing texthelper.online at
-this build. Everything here is currently **not done** in this environment
-(no credentials, no deploy) - this is the punch list, not a status report.
+Concise list of what's left before texthelper.online is fully launch-ready.
+The site is deployed and live (see Status below) - this tracks the
+remaining items, not a pre-deploy plan anymore.
 
 ## Required before any real traffic
 
-- [ ] **Get a Groq API key** at https://console.groq.com/keys and verify
-      the current free-tier model roster/limits at
-      https://console.groq.com/docs/models and
-      https://console.groq.com/settings/limits (both can change).
-- [ ] **Set environment variables on the host**, not in a committed file:
-      `GROQ_API_KEY`, `GROQ_MODEL`, `SITE_URL`, `OPERATOR_NAME`,
-      `OPERATOR_CONTACT_EMAIL`. See `.env.example` for the full list.
-- [ ] **Run one real, manual AI smoke test** after deploying: submit one
-      short sentence to the Paraphrasing Tool and confirm you get a
-      sensible rewrite, not an error. (Not done in this environment - no
-      key was available.)
-- [ ] **Create the quota data directory** outside the public web root with
-      correct write permissions (`QUOTA_DATA_DIR`) - see
-      CPANEL_DEPLOYMENT.md step 8.
-- [ ] **Confirm HTTPS/AutoSSL is active** for the real domain.
+- [x] Groq API key obtained and set as a server env var.
+- [x] Environment variables set on the host via cPanel's Setup Node.js App
+      UI (see `.env.example` for the full list).
+- [x] Real AI smoke test done against production (Paraphrasing Tool and
+      the grammar checker's deep-suggestions path both confirmed working
+      against the live Groq API).
+- [x] Quota data directory created outside the web root
+      (`~/texthelper-data/quota`) with `700` permissions.
+- [ ] **Confirm HTTPS/AutoSSL is active** for the real domain - pending on
+      DNS propagation finishing (nameservers were changed; not yet fully
+      propagated as of the last check).
 - [ ] **Decide on the contact method**: either set `CONTACT_SMTP_*` env
       vars for a working form, or set `OPERATOR_CONTACT_EMAIL` for a
       mailto fallback. Don't leave both unset in production.
@@ -39,11 +35,19 @@ this build. Everything here is currently **not done** in this environment
       requirements automatically (see the Privacy page's own wording) -
       review your actual consent setup against the rules that apply to
       your audience.
-- [ ] Decide whether to enable AdSense now or later. If now: apply for
-      AdSense separately (this project makes no claim about approval
-      odds), then set `ADSENSE_ENABLED=true` and `ADSENSE_CLIENT_ID`, and
-      add a real `public/ads.txt` with your actual publisher ID (do not
-      invent one).
+- [x] AdSense: `ADSENSE_ENABLED=true` and `ADSENSE_CLIENT_ID` are set (as
+      **build-time** env vars - see CPANEL_DEPLOYMENT.md 2a). `/ads.txt` is
+      generated automatically from `ADSENSE_CLIENT_ID` at runtime, no
+      manual file needed.
+- [ ] **Set up "Privacy & messaging" (Funding Choices) in the AdSense
+      dashboard** before serving ads to EEA/UK/Switzerland visitors - this
+      project does not implement a custom consent banner; Google's own
+      dashboard-configured consent prompt is the supported path, and it
+      must be turned on deliberately, not assumed.
+- [ ] After the AdSense verification method you chose finishes review,
+      confirm live: visit `https://texthelper.online/ads.txt` (should show
+      `google.com, pub-XXXX, DIRECT, f08c47fec0942fa0`, not a 404), and
+      view-source the homepage for the `adsbygoogle.js` script tag.
 - [ ] Spot-check a handful of tool pages on an actual phone, not just the
       Playwright mobile-viewport tests.
 
@@ -58,12 +62,12 @@ this build. Everything here is currently **not done** in this environment
       `AI_DAILY_TOKEN_LIMIT` once you have a sense of real traffic versus
       your actual Groq plan limits.
 
-## Explicitly NOT done by this build, by design (your call, not an oversight)
+## Status
 
-- No code has been pushed, published, or deployed anywhere.
+- [x] Deployed: `texthelper.online` is live on cPanel (Node 22, Passenger).
+- [x] Real AI traffic confirmed working against Groq in production.
+- [x] AdSense verification in progress (code snippet method).
 - No billing of any kind has been enabled.
-- No AdSense application has been submitted.
-- No real API traffic has been sent to Groq.
 
 See TOOL_CHECKLIST.md for per-tool status and README.md's "Testing" section
 for exactly what was run and what passed.

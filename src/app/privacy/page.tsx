@@ -61,15 +61,42 @@ export default function PrivacyPage() {
       </p>
 
       <h2 className="text-lg font-semibold">Advertising</h2>
-      <p>
-        {adsenseConfig.enabled
-          ? "This site displays advertising, which may use cookies or similar technology to show relevant ads. See your browser or ad settings to control ad personalization."
-          : "This site does not currently display advertising."}{" "}
-        We do not claim that any cookie banner or consent mechanism on this site automatically satisfies every
-        legal requirement that may apply to visitors in your location - if you operate this site for an
-        audience subject to specific consent rules (e.g. GDPR/UK GDPR or similar), confirm your consent setup
-        meets those rules directly.
-      </p>
+      {adsenseConfig.enabled ? (
+        <>
+          <p>
+            This site displays ads served by{" "}
+            <a
+              href="https://policies.google.com/technologies/ads"
+              target="_blank"
+              rel="noreferrer"
+              className="text-primary underline"
+            >
+              Google AdSense
+            </a>
+            . Google and its partners may use cookies or similar technology to show ads based on your visits to
+            this and other sites; see Google&apos;s page linked above for how that works and how to control ad
+            personalization, and{" "}
+            <a
+              href="https://adssettings.google.com/"
+              target="_blank"
+              rel="noreferrer"
+              className="text-primary underline"
+            >
+              Google Ads Settings
+            </a>{" "}
+            to manage your own ad personalization preferences directly.
+          </p>
+          <p>
+            Where Google&apos;s own consent prompt is configured to appear for visitors in the EEA, UK, or
+            Switzerland, that prompt and the consent choices it records are handled entirely by Google, not by
+            custom code on this site - we do not build or control a separate consent banner. If you operate this
+            site for an audience subject to those rules, confirm Google&apos;s consent configuration (and any
+            other obligations that apply to you) independently rather than relying on this page alone.
+          </p>
+        </>
+      ) : (
+        <p>This site does not currently display advertising.</p>
+      )}
 
       <h2 className="text-lg font-semibold">Contact</h2>
       <p>

@@ -42,6 +42,48 @@ The `postbuild` npm script (`scripts/copy-standalone-assets.mjs`) copies
 Next's standalone output traces only server *code* dependencies, not
 static assets, so without this step the deployed site would 404 on CSS/JS.
 
+### 2a. Some env vars MUST be set correctly at build time, not just on the server
+
+This bit cost real time to discover during the first deploy, so it's worth
+its own warning. Most of this site's pages (`/`, `/privacy`, `/about`,
+`/terms`, `/sitemap.xml`, `/robots.txt`, every `/tools/*` and
+`/categories/*` page) are **statically prerendered** at `next build` time -
+that's intentional, it's what makes them fast and SEO-friendly. But it also
+means they bake in whatever environment variables were present **on the
+machine that ran `next build`**, not whatever you later set in cPanel's
+Setup Node.js App "Environment Variables" UI. Setting `SITE_URL` or
+`ADSENSE_ENABLED` only on the server has **zero effect** on these pages -
+the server-side env vars only matter for the dynamic routes (`/api/ai`,
+`/api/ai/status`, `/api/contact`, `/ads.txt`), which really are evaluated
+per-request.
+
+Concretely, this means `SITE_URL`, `ADSENSE_ENABLED`, `ADSENSE_CLIENT_ID`,
+`OPERATOR_NAME`, `OPERATOR_CONTACT_EMAIL`, and `OPERATOR_ADDRESS` must all
+be correct **in the shell that runs the build**, e.g.:
+
+```bash
+SITE_URL=https://texthelper.online \
+ADSENSE_ENABLED=true \
+ADSENSE_CLIENT_ID=ca-pub-XXXXXXXXXXXXXXXX \
+OPERATOR_NAME="Your Name or Business" \
+OPERATOR_CONTACT_EMAIL=you@example.com \
+npm run build
+```
+
+Don't rely on a local `.env.local` with dev-friendly defaults (like
+`SITE_URL=http://localhost:3000`) for a deployment build - either override
+these specific vars inline on the build command as above, or maintain a
+separate `.env.production.local` with the real values and make sure your
+build step actually loads it. After any build intended for deployment,
+spot-check before uploading:
+
+```bash
+grep -o 'https://[^"]*' .next/standalone/.next/server/app/sitemap.xml.body | head -3
+```
+
+If that shows `localhost` instead of your real domain, the build used the
+wrong env vars - rebuild before uploading, don't just fix it on the server.
+
 ## 3. What to upload (the compatible production artifact)
 
 Upload the **entire contents of `.next/standalone/`** - after the build +
