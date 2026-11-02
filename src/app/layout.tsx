@@ -1,11 +1,20 @@
 import type { Metadata, Viewport } from "next";
-import Script from "next/script";
 import "./globals.css";
 import { ThemeScript } from "@/components/theme/theme-script";
 import { Providers } from "@/components/providers";
 import { SiteHeader } from "@/components/layout/site-header";
 import { SiteFooter } from "@/components/layout/site-footer";
 import { siteConfig, adsenseConfig } from "@/lib/config/site";
+
+// AdSense's crawler reads the raw HTML. It does not run Next.js hydration.
+// next/script strategy="afterInteractive" only emits a <link rel="preload">
+// in that HTML and injects the real <script> after the page becomes
+// interactive, so site verification never sees the snippet. A plain async
+// script is what Google looks for between <head> and </head>.
+const adsenseClientId =
+  adsenseConfig.enabled && /^ca-pub-\d+$/.test(adsenseConfig.clientId)
+    ? adsenseConfig.clientId
+    : "";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
@@ -27,6 +36,9 @@ export const metadata: Metadata = {
     description: siteConfig.description,
   },
   robots: { index: true, follow: true },
+  ...(adsenseClientId
+    ? { other: { "google-adsense-account": adsenseClientId } }
+    : {}),
 };
 
 export const viewport: Viewport = {
@@ -43,14 +55,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en" suppressHydrationWarning>
       <head>
         <ThemeScript />
-        {adsenseConfig.enabled && adsenseConfig.clientId && (
-          <Script
+        {adsenseClientId ? (
+          <script
             async
-            src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${adsenseConfig.clientId}`}
+            src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${adsenseClientId}`}
             crossOrigin="anonymous"
-            strategy="afterInteractive"
           />
-        )}
+        ) : null}
       </head>
       <body className="flex min-h-screen flex-col">
         <Providers>

@@ -5,7 +5,7 @@
 // complete site on its own. Run after `next build` and before starting the
 // standalone server (locally for testing, or on the production host after
 // uploading the build - see CPANEL_DEPLOYMENT.md).
-import { cp, access, rm } from "fs/promises";
+import { cp, access, rm, rename, writeFile } from "fs/promises";
 import path from "path";
 
 const root = process.cwd();
@@ -50,6 +50,34 @@ async function main() {
   if (await exists(leakedDataDir)) {
     await rm(leakedDataDir, { recursive: true, force: true });
     console.log("Removed leaked data/ (local quota ledger) from .next/standalone - this must never ship.");
+  }
+
+  // Internet-wide scanners routinely probe Next.js sites with malformed
+  // Server Action requests (garbage "Next-Action" header values - the
+  // "React2Shell" scan pattern). When that error isn't caught inside Next's
+  // own request handling, it surfaces as an uncaught exception and kills the
+  // whole process; under a process manager that keeps respawning into the
+  // same scanner traffic, this becomes a crash loop that eventually exhausts
+  // the manager's restart budget and leaves no backend running at all. Next
+  // regenerates server.js on every build, so the guard has to be injected
+  // here rather than hand-edited in the deployed file.
+  const generatedServer = path.join(standaloneDir, "server.js");
+  const realServer = path.join(standaloneDir, "server.generated.js");
+  if (await exists(generatedServer)) {
+    await rename(generatedServer, realServer);
+    await writeFile(
+      generatedServer,
+      `process.on("uncaughtException", (err) => {
+  console.error("[server.js] uncaughtException (process kept alive):", err);
+});
+process.on("unhandledRejection", (err) => {
+  console.error("[server.js] unhandledRejection (process kept alive):", err);
+});
+
+require("./server.generated.js");
+`
+    );
+    console.log("Wrapped server.js with uncaughtException/unhandledRejection guards (real entry moved to server.generated.js).");
   }
 }
 
