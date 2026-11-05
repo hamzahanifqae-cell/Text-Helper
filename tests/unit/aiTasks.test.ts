@@ -1,4 +1,5 @@
 import { describe, it, expect } from "vitest";
+import { activeVoiceTask, conclusionGeneratorTask, formalInformalTask } from "@/lib/ai/tasks/rewrite";
 import { grammarDeepTask } from "@/lib/ai/tasks/grammarDeep";
 import { scrubFabricatedAuthorshipClaims } from "@/lib/ai/tasks/aiPatternCommentary";
 import { humanizeTask } from "@/lib/ai/tasks/humanize";
@@ -78,6 +79,35 @@ describe("humanizeTask.buildPrompt", () => {
     const options = humanizeTask.optionsSchema.parse({});
     const built = humanizeTask.buildPrompt("text", options);
     expect(built.systemPrompt.toLowerCase()).toContain("detect");
+  });
+});
+
+describe("rewrite direction instructions", () => {
+  it("asks the active-voice task only to turn passive voice into active voice", () => {
+    const options = activeVoiceTask.optionsSchema.parse({});
+    const built = activeVoiceTask.buildPrompt("The report was reviewed by the team.", options);
+    expect(built.systemPrompt).toContain("passive-voice sentences into active voice");
+    expect(built.systemPrompt.toLowerCase()).not.toContain("into passive");
+  });
+
+  it("offers formal and informal directions with different instructions", () => {
+    const formal = formalInformalTask.buildPrompt(
+      "I can't make the meeting.",
+      formalInformalTask.optionsSchema.parse({ direction: "toFormal" }),
+    );
+    const informal = formalInformalTask.buildPrompt(
+      "I am unable to attend.",
+      formalInformalTask.optionsSchema.parse({ direction: "toInformal" }),
+    );
+    expect(formal.systemPrompt).toContain("no contractions or slang");
+    expect(informal.systemPrompt).toContain("contractions are fine");
+  });
+
+  it("asks the conclusion task for one closing paragraph and no new claims", () => {
+    const options = conclusionGeneratorTask.optionsSchema.parse({});
+    const built = conclusionGeneratorTask.buildPrompt("Evening visits rose.", options);
+    expect(built.systemPrompt).toContain("concluding paragraph");
+    expect(built.systemPrompt).toContain("without introducing new claims");
   });
 });
 

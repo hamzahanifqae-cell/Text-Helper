@@ -2,7 +2,7 @@ import type { MetadataRoute } from "next";
 import { TOOLS } from "@/lib/registry/tools";
 import { CATEGORIES } from "@/lib/registry/categories";
 import { siteConfig } from "@/lib/config/site";
-import { CONTENT_UPDATED } from "@/lib/seo/content-updated";
+import { CONTENT_UPDATED, TOOL_CONTENT_UPDATED } from "@/lib/seo/content-updated";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const base = siteConfig.url;
@@ -27,7 +27,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   }));
   const toolPages = TOOLS.map((t) => ({
     url: `${base}/tools/${t.slug}`,
-    lastModified: CONTENT_UPDATED,
+    lastModified: TOOL_CONTENT_UPDATED[t.slug] ?? CONTENT_UPDATED,
     changeFrequency: "monthly" as const,
     priority: 0.8,
   }));

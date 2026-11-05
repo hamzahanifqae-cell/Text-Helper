@@ -14,17 +14,40 @@ export default function Page() {
       instructions={
         <>
           <h2>How it works</h2>
-          <p>Paste text and click Generate. Passive-voice sentences are rewritten into active voice where that improves clarity; sentences that are already active, or where passive voice is clearly intentional, are left alone.</p>
-          <h2>Example use</h2>
-          <p>&quot;The report was reviewed by the team&quot; becomes &quot;The team reviewed the report.&quot;</p>
+          <p>
+            Paste text and click Generate. The only direction is passive voice to active voice. A sentence
+            that is already active stays as it is. Where the actor is unknown or the passive wording is
+            clearly intentional, the instruction is to leave that sentence unchanged.
+          </p>
+          <h2>Example</h2>
+          <p>
+            Passive to active: &quot;The report was reviewed by the team.&quot; becomes &quot;The team reviewed the report.&quot;
+          </p>
+          <p>
+            Already active: &quot;The team reviewed the report.&quot; stays &quot;The team reviewed the report.&quot;
+          </p>
+          <p>
+            These pairs follow the instruction sent with your text. The generated wording can differ, so read the result before you use it.
+          </p>
           <h2>Limitations</h2>
           <ul>
-            <li>Passive voice is sometimes the right choice (e.g. when the actor is unknown or unimportant) - the AI tries to judge this, but isn&apos;t always right.</li>
+            <li>This page does not convert active voice into passive voice.</li>
+            <li>Passive voice is sometimes the right choice, for example when the actor is unknown. The model tries to judge that and is not always right.</li>
           </ul>
         </>
       }
     >
-      <AIRewriteWorkspace toolSlug={tool.slug} taskId="active-voice" />
+      <AIRewriteWorkspace
+        toolSlug={tool.slug}
+        taskId="active-voice"
+        placeholder="Paste passive-voice text…"
+        guidance={
+          <p>
+            Passive voice is rewritten into active voice. A sentence that is already active stays as it is.
+            This tool does not turn active voice into passive voice.
+          </p>
+        }
+      />
     </ToolPageLayout>
   );
 }

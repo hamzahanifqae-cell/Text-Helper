@@ -141,4 +141,28 @@ There is no purchase or signup. Do not treat ad impressions as the SEO conversio
 
 ## Deploy
 
-Not done in this pass. The usual cPanel package is a zip of `.next/standalone` after `SITE_URL=https://texthelper.online` is set for the build. Rebuild before packaging so this copy is what gets uploaded. Restart the Node app after replacing the files. Leave `~/texthelper-data` in place.
+The first pass was deployed on 5 November 2026. This second pass is local only until the next upload. The usual cPanel package is a zip of `.next/standalone` after `SITE_URL=https://texthelper.online` is set for the build. Rebuild before packaging so this copy is what gets uploaded. Restart the Node app after replacing the files. Leave `~/texthelper-data` in place.
+
+## Second pass, 5 November 2026
+
+Search Console supplied page totals only. No page-filtered query export was included, so the intent for each URL below is a hypothesis. Position and a lack of clicks were not treated as a reason to change a title. Titles and meta descriptions were left as they were.
+
+Live check the same day, before this copy was deployed:
+
+- `https://texthelper.online/tools/active-voice-converter` returned 200, canonical `https://texthelper.online/tools/active-voice-converter`, title “Active Voice Converter | TextHelper”.
+- The same path with a trailing slash returned 308 to the URL without the slash. Conclusion generator and formal/informal converter behaved the same way.
+- The sitemap lists the versions without a trailing slash. Internal links are built from those paths.
+
+| URL | Evidence used | Change |
+| --- | --- | --- |
+| `/tools/active-voice-converter` | 55 impressions, average position 85.42. The task prompt rewrites passive voice into active voice and leaves active sentences unchanged. It has no active-to-passive direction. | A note directly above the input states that one direction. The page shows one passive-to-active pair and one already-active pair that stays unchanged. Title unchanged. |
+| `/tools/conclusion-generator` | 34 impressions, average position 83.09. The task writes one closing paragraph and is told not to add new claims. | A note above the input says to paste the content, not only a topic. The page shows a short library-hours paragraph and a closing paragraph that only restates it. Title unchanged. |
+| `/tools/formal-informal-converter` | 11 impressions, 1 click. The tool has two controls, Make formal and Make informal, with different prompt instructions. | The note above the input and the line under the buttons name both directions. Each direction has its own before-and-after pair. Title “Formal / Informal Converter” unchanged. |
+
+The example sentences illustrate those instructions. They are not stored model outputs, and the pages say a generated result can be worded differently.
+
+Sitemap `lastmod` for those three URLs is `2026-11-05T14:46:00.000Z`. The other tool URLs stay at `2026-11-05T00:00:00.000Z`.
+
+Checked locally after the edit: lint, typecheck, 139 unit tests, and a production build. The prerendered HTML for the three URLs contains the new notes and examples, the same titles, and canonicals on `https://texthelper.online` without a trailing slash.
+
+After the next deploy, in Search Console inspect those three URLs and request indexing. Then filter Performance by each page and read the queries. Change a title only if a query asks for something the page actually does and the current title hides it. The slash URLs should keep consolidating to the URLs without a slash.

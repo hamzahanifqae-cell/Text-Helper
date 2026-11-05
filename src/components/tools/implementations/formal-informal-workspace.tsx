@@ -12,14 +12,25 @@ export function FormalInformalWorkspace() {
     <AIRewriteWorkspace
       toolSlug="formal-informal-converter"
       taskId="formal-informal"
+      placeholder="Paste the text you want to make formal or informal…"
+      guidance={
+        <p>Choose Make formal or Make informal under the box. Both directions are available on this page.</p>
+      }
       buildOptions={(protectedPhrases) => ({ direction, protectedPhrases })}
       settings={
-        <Tabs value={direction} onValueChange={(v) => setDirection(v as Direction)}>
-          <TabsList>
-            <TabsTrigger value="toFormal">Make formal</TabsTrigger>
-            <TabsTrigger value="toInformal">Make informal</TabsTrigger>
-          </TabsList>
-        </Tabs>
+        <div className="flex flex-col gap-2">
+          <Tabs value={direction} onValueChange={(v) => setDirection(v as Direction)}>
+            <TabsList>
+              <TabsTrigger value="toFormal">Make formal</TabsTrigger>
+              <TabsTrigger value="toInformal">Make informal</TabsTrigger>
+            </TabsList>
+          </Tabs>
+          <p className="text-sm text-muted-foreground">
+            {direction === "toFormal"
+              ? "Make formal removes contractions and slang and uses complete, precise sentences."
+              : "Make informal allows contractions and conversational wording."}
+          </p>
+        </div>
       }
     />
   );

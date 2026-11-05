@@ -20,6 +20,8 @@ export function AIRewriteWorkspace({
   toolSlug,
   taskId,
   settings,
+  guidance,
+  placeholder,
   buildOptions = (protectedPhrases) => ({ protectedPhrases }),
   generateLabel = "Generate",
   showProtectedPhrases = true,
@@ -28,6 +30,8 @@ export function AIRewriteWorkspace({
   toolSlug: string;
   taskId: string;
   settings?: React.ReactNode;
+  guidance?: React.ReactNode;
+  placeholder?: string;
   buildOptions?: (protectedPhrases: string[]) => Record<string, unknown>;
   generateLabel?: string;
   showProtectedPhrases?: boolean;
@@ -53,6 +57,8 @@ export function AIRewriteWorkspace({
       {aiStatus && !aiStatus.configured && <AIUnavailableBanner />}
       {aiStatus && aiStatus.configured && !aiStatus.quotaAvailable && <AIUnavailableBanner quotaOnly />}
 
+      {guidance ? <div className="text-sm leading-relaxed text-muted-foreground">{guidance}</div> : null}
+
       <TextInputPanel
         toolSlug={toolSlug}
         value={history.value}
@@ -62,6 +68,7 @@ export function AIRewriteWorkspace({
         canUndo={history.canUndo}
         canRedo={history.canRedo}
         clear={history.clear}
+        placeholder={placeholder}
       />
       <div className="flex justify-between text-xs text-muted-foreground">
         <span>
