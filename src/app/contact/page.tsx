@@ -1,12 +1,12 @@
-import type { Metadata } from "next";
 import { ContactForm } from "@/components/contact/contact-form";
 import { operatorConfig } from "@/lib/config/site";
+import { pageMetadata } from "@/lib/seo/metadata";
 
-export const metadata: Metadata = {
+export const metadata = pageMetadata({
   title: "Contact",
   description: "Contact the team behind TextHelper.",
-  alternates: { canonical: "/contact" },
-};
+  path: "/contact",
+});
 
 function isSmtpConfigured(): boolean {
   return Boolean(

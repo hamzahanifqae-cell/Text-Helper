@@ -1,11 +1,11 @@
-import type { Metadata } from "next";
 import { siteConfig, operatorConfig } from "@/lib/config/site";
+import { pageMetadata } from "@/lib/seo/metadata";
 
-export const metadata: Metadata = {
+export const metadata = pageMetadata({
   title: "Terms",
   description: "Terms of use for TextHelper.",
-  alternates: { canonical: "/terms" },
-};
+  path: "/terms",
+});
 
 export default function TermsPage() {
   return (

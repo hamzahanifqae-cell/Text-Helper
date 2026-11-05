@@ -2,23 +2,34 @@ import type { MetadataRoute } from "next";
 import { TOOLS } from "@/lib/registry/tools";
 import { CATEGORIES } from "@/lib/registry/categories";
 import { siteConfig } from "@/lib/config/site";
+import { CONTENT_UPDATED } from "@/lib/seo/content-updated";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const base = siteConfig.url;
-  const staticPages = ["", "/tools", "/about", "/contact", "/privacy", "/terms"].map((path) => ({
+  // About, contact, privacy, and terms are unchanged, so they omit lastmod
+  // rather than advertising a date that does not match their content.
+  const unchangedPages = ["/about", "/contact", "/privacy", "/terms"].map((path) => ({
     url: `${base}${path}`,
+    changeFrequency: "yearly" as const,
+    priority: 0.4,
+  }));
+  const updatedHubs = ["", "/tools"].map((path) => ({
+    url: `${base}${path}`,
+    lastModified: CONTENT_UPDATED,
     changeFrequency: "monthly" as const,
     priority: path === "" ? 1 : 0.6,
   }));
   const categoryPages = CATEGORIES.map((c) => ({
     url: `${base}/categories/${c.id}`,
+    lastModified: CONTENT_UPDATED,
     changeFrequency: "monthly" as const,
     priority: 0.7,
   }));
   const toolPages = TOOLS.map((t) => ({
     url: `${base}/tools/${t.slug}`,
+    lastModified: CONTENT_UPDATED,
     changeFrequency: "monthly" as const,
     priority: 0.8,
   }));
-  return [...staticPages, ...categoryPages, ...toolPages];
+  return [...updatedHubs, ...unchangedPages, ...categoryPages, ...toolPages];
 }

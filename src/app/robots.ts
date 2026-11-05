@@ -7,9 +7,9 @@ export default function robots(): MetadataRoute.Robots {
       {
         userAgent: "*",
         allow: "/",
-        // No private/user-result routes exist on this site to disallow -
-        // tool results are rendered client-side and never persisted at a
-        // public URL (see PRIVACY.md / Privacy page).
+        // /api/* is not a page, but robots.txt is not a reliable way to keep a
+        // URL out of search. Those routes send X-Robots-Tag: noindex instead,
+        // which Google can see only if it is allowed to fetch them.
       },
     ],
     sitemap: `${siteConfig.url}/sitemap.xml`,

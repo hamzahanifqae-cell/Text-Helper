@@ -1,15 +1,11 @@
-import type { Metadata } from "next";
 import { getTool } from "@/lib/registry/tools";
+import { toolPageMetadata } from "@/lib/seo/metadata";
 import { ToolPageLayout } from "@/components/tools/tool-page-layout";
 import { FormalInformalWorkspace } from "@/components/tools/implementations/formal-informal-workspace";
 
 const tool = getTool("formal-informal-converter")!;
 
-export const metadata: Metadata = {
-  title: tool.title,
-  description: tool.shortDescription,
-  alternates: { canonical: `/tools/${tool.slug}` },
-};
+export const metadata = toolPageMetadata(tool);
 
 export default function Page() {
   return (

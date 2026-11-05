@@ -20,3 +20,12 @@ export const adsenseConfig = {
   enabled: process.env.ADSENSE_ENABLED === "true",
   clientId: process.env.ADSENSE_CLIENT_ID || "",
 };
+
+// GA4 measurement IDs are public (they ship in the page), but a bad value
+// must not be interpolated into a script. Set this at build time: these
+// pages are prerendered, so a cPanel-only value never reaches the HTML.
+const gaMeasurementId = process.env.GA_MEASUREMENT_ID?.trim() ?? "";
+
+export const analyticsConfig = {
+  measurementId: /^G-[A-Z0-9]+$/.test(gaMeasurementId) ? gaMeasurementId : "",
+};

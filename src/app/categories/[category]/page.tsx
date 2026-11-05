@@ -1,9 +1,13 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { notFound } from "next/navigation";
 import { CATEGORIES, getCategory } from "@/lib/registry/categories";
 import { getToolsByCategory } from "@/lib/registry/tools";
 import { ToolCard } from "@/components/tools/tool-card";
 import { AdSlot } from "@/components/ads/ad-slot";
+import { JsonLd } from "@/components/seo/json-ld";
+import { pageMetadata } from "@/lib/seo/metadata";
+import { categorySchema } from "@/lib/seo/schema";
 
 export function generateStaticParams() {
   return CATEGORIES.map((c) => ({ category: c.id }));
@@ -17,11 +21,11 @@ export async function generateMetadata({
   const { category: categoryId } = await params;
   const category = getCategory(categoryId);
   if (!category) return {};
-  return {
-    title: category.title,
+  return pageMetadata({
+    title: `Browse ${category.title}`,
     description: category.description,
-    alternates: { canonical: `/categories/${category.id}` },
-  };
+    path: `/categories/${category.id}`,
+  });
 }
 
 export default async function CategoryPage({ params }: { params: Promise<{ category: string }> }) {
@@ -32,6 +36,14 @@ export default async function CategoryPage({ params }: { params: Promise<{ categ
 
   return (
     <div className="container-page py-10 sm:py-14">
+      <JsonLd data={categorySchema(category, tools)} />
+      <nav className="mb-4 text-sm text-muted-foreground" aria-label="Breadcrumb">
+        <Link href="/" className="hover:text-foreground">Home</Link>
+        {" / "}
+        <Link href="/tools" className="hover:text-foreground">Tools</Link>
+        {" / "}
+        <span aria-current="page">{category.title}</span>
+      </nav>
       <h1 className="section-heading">{category.title}</h1>
       <p className="mt-2 max-w-2xl text-muted-foreground">{category.description}</p>
       <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">

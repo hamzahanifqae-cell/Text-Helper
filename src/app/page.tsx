@@ -1,5 +1,5 @@
 import Link from "next/link";
-import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/seo/metadata";
 import { ArrowRight, Check, FileText, Sparkles, WandSparkles, ShieldCheck, ArrowUpRight } from "lucide-react";
 import { getPopularTools, TOOLS, getToolsByCategory } from "@/lib/registry/tools";
 import { CATEGORIES } from "@/lib/registry/categories";
@@ -9,17 +9,21 @@ import { ToolIcon } from "@/components/tools/tool-icon";
 import { AdSlot } from "@/components/ads/ad-slot";
 import { buttonVariants } from "@/components/ui/button";
 import { siteConfig } from "@/lib/config/site";
+import { JsonLd } from "@/components/seo/json-ld";
+import { websiteSchema } from "@/lib/seo/schema";
 
-export const metadata: Metadata = {
+export const metadata = pageMetadata({
   title: `${siteConfig.name} - ${siteConfig.tagline}`,
   description: siteConfig.description,
-  alternates: { canonical: "/" },
-};
+  path: "/",
+  absoluteTitle: true,
+});
 
 export default function HomePage() {
   const popular = getPopularTools();
   return (
     <div>
+      <JsonLd data={websiteSchema()} />
       <section className="hero-section">
         <div className="container-page hero-grid">
           <div>
@@ -53,6 +57,29 @@ export default function HomePage() {
             </div>
           </div>
         </div>
+      </section>
+
+      <section className="container-page pb-2 pt-12 sm:pt-16">
+        <h2 className="section-heading">Common text tasks</h2>
+        <p className="mt-2 max-w-2xl text-sm text-muted-foreground">Each task has its own page. The tool is at the top; the notes underneath explain what the result includes.</p>
+        <ul className="mt-6 grid gap-3 sm:grid-cols-2">
+          <li className="rounded-2xl border border-border bg-card p-4">
+            <Link href="/tools/word-counter" className="font-semibold text-primary hover:underline">Word counter</Link>
+            <p className="mt-1 text-sm text-muted-foreground">Count words, sentences, paragraphs, and lines.</p>
+          </li>
+          <li className="rounded-2xl border border-border bg-card p-4">
+            <Link href="/tools/character-counter" className="font-semibold text-primary hover:underline">Character counter with and without spaces</Link>
+            <p className="mt-1 text-sm text-muted-foreground">See both totals, including how emoji and line breaks are counted.</p>
+          </li>
+          <li className="rounded-2xl border border-border bg-card p-4">
+            <Link href="/tools/case-converter" className="font-semibold text-primary hover:underline">Uppercase, lowercase, and sentence case</Link>
+            <p className="mt-1 text-sm text-muted-foreground">Also converts title case and toggle case on the same page.</p>
+          </li>
+          <li className="rounded-2xl border border-border bg-card p-4">
+            <Link href="/tools/text-cleaner" className="font-semibold text-primary hover:underline">Remove extra spaces from text</Link>
+            <p className="mt-1 text-sm text-muted-foreground">Also removes empty lines, duplicate lines, and HTML tags.</p>
+          </li>
+        </ul>
       </section>
 
       <section className="container-page py-12 sm:py-16">

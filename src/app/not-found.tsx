@@ -1,5 +1,12 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { buttonVariants } from "@/components/ui/button";
+
+export const metadata: Metadata = {
+  title: { absolute: "Page not found | TextHelper" },
+  description: "That page is not on TextHelper.",
+  robots: { index: false, follow: true },
+};
 
 export default function NotFound() {
   return (

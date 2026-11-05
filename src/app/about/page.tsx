@@ -1,12 +1,12 @@
-import type { Metadata } from "next";
 import { siteConfig, operatorConfig } from "@/lib/config/site";
 import { TOOLS } from "@/lib/registry/tools";
+import { pageMetadata } from "@/lib/seo/metadata";
 
-export const metadata: Metadata = {
+export const metadata = pageMetadata({
   title: "About",
   description: "What TextHelper is, how its tools work, and how it handles your text.",
-  alternates: { canonical: "/about" },
-};
+  path: "/about",
+});
 
 export default function AboutPage() {
   const localCount = TOOLS.filter((t) => t.kind === "local").length;

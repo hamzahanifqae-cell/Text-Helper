@@ -4,7 +4,7 @@ import { ThemeScript } from "@/components/theme/theme-script";
 import { Providers } from "@/components/providers";
 import { SiteHeader } from "@/components/layout/site-header";
 import { SiteFooter } from "@/components/layout/site-footer";
-import { siteConfig, adsenseConfig } from "@/lib/config/site";
+import { siteConfig, adsenseConfig, analyticsConfig } from "@/lib/config/site";
 
 // AdSense's crawler reads the raw HTML. It does not run Next.js hydration.
 // next/script strategy="afterInteractive" only emits a <link rel="preload">
@@ -16,6 +16,8 @@ const adsenseClientId =
     ? adsenseConfig.clientId
     : "";
 
+const googleAnalyticsId = analyticsConfig.measurementId;
+
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
   title: {
@@ -23,17 +25,17 @@ export const metadata: Metadata = {
     template: `%s | ${siteConfig.name}`,
   },
   description: siteConfig.description,
+  // Leave title and description unset here. An absolute value on the root
+  // layout is reused on every page, so tool and article pages were all
+  // sharing the homepage Open Graph title. Each page's own title and
+  // description fill these in.
   openGraph: {
-    title: `${siteConfig.name} - ${siteConfig.tagline}`,
-    description: siteConfig.description,
-    url: siteConfig.url,
     siteName: siteConfig.name,
     type: "website",
+    locale: "en_US",
   },
   twitter: {
     card: "summary",
-    title: `${siteConfig.name} - ${siteConfig.tagline}`,
-    description: siteConfig.description,
   },
   robots: { index: true, follow: true },
   ...(adsenseClientId
@@ -61,6 +63,16 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${adsenseClientId}`}
             crossOrigin="anonymous"
           />
+        ) : null}
+        {googleAnalyticsId ? (
+          <>
+            <script async src={`https://www.googletagmanager.com/gtag/js?id=${googleAnalyticsId}`} />
+            <script
+              dangerouslySetInnerHTML={{
+                __html: `window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','${googleAnalyticsId}');`,
+              }}
+            />
+          </>
         ) : null}
       </head>
       <body className="flex min-h-screen flex-col">

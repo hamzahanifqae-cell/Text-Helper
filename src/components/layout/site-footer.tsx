@@ -45,6 +45,10 @@ export function SiteFooter() {
           <h3 className="text-sm font-semibold">Company</h3>
           <ul className="mt-3 flex flex-col gap-2">
             <li><Link href="/tools" className="text-sm text-muted-foreground hover:text-foreground">All Tools</Link></li>
+            <li><Link href="/tools/word-counter" className="text-sm text-muted-foreground hover:text-foreground">Word counter</Link></li>
+            <li><Link href="/tools/character-counter" className="text-sm text-muted-foreground hover:text-foreground">Character counter</Link></li>
+            <li><Link href="/tools/case-converter" className="text-sm text-muted-foreground hover:text-foreground">Case converter</Link></li>
+            <li><Link href="/tools/text-cleaner" className="text-sm text-muted-foreground hover:text-foreground">Text cleaner</Link></li>
             <li><Link href="/about" className="text-sm text-muted-foreground hover:text-foreground">About</Link></li>
             <li><Link href="/contact" className="text-sm text-muted-foreground hover:text-foreground">Contact</Link></li>
             <li><Link href="/privacy" className="text-sm text-muted-foreground hover:text-foreground">Privacy</Link></li>

@@ -1,11 +1,11 @@
-import type { Metadata } from "next";
-import { siteConfig, operatorConfig, adsenseConfig } from "@/lib/config/site";
+import { siteConfig, operatorConfig, adsenseConfig, analyticsConfig } from "@/lib/config/site";
+import { pageMetadata } from "@/lib/seo/metadata";
 
-export const metadata: Metadata = {
+export const metadata = pageMetadata({
   title: "Privacy",
   description: "How TextHelper handles your text and data.",
-  alternates: { canonical: "/privacy" },
-};
+  path: "/privacy",
+});
 
 export default function PrivacyPage() {
   return (
@@ -96,6 +96,25 @@ export default function PrivacyPage() {
         </>
       ) : (
         <p>This site does not currently display advertising.</p>
+      )}
+
+      <h2 className="text-lg font-semibold">Analytics</h2>
+      {analyticsConfig.measurementId ? (
+        <p>
+          This site uses{" "}
+          <a
+            href="https://policies.google.com/privacy"
+            target="_blank"
+            rel="noreferrer"
+            className="text-primary underline"
+          >
+            Google Analytics
+          </a>{" "}
+          to understand which pages are visited. Google receives the page address, browser information, and a
+          client identifier stored in a cookie. The text you type into a tool is not sent to Google Analytics.
+        </p>
+      ) : (
+        <p>This site does not currently use an analytics service.</p>
       )}
 
       <h2 className="text-lg font-semibold">Contact</h2>

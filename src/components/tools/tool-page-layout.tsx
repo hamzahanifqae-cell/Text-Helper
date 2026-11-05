@@ -2,6 +2,9 @@ import { ToolMeta } from "@/lib/registry/tools";
 import { ToolIcon } from "@/components/tools/tool-icon";
 import { Badge } from "@/components/ui/badge";
 import { getCategory } from "@/lib/registry/categories";
+import { JsonLd } from "@/components/seo/json-ld";
+import { RelatedTools } from "@/components/seo/related-tools";
+import { toolSchema } from "@/lib/seo/schema";
 import Link from "next/link";
 
 export function ToolPageLayout({
@@ -16,7 +19,12 @@ export function ToolPageLayout({
   const category = getCategory(tool.category);
   return (
     <div className="container-page py-8 sm:py-10">
+      <JsonLd data={toolSchema(tool, category)} />
       <nav className="mb-4 text-sm text-muted-foreground" aria-label="Breadcrumb">
+        <Link href="/" className="hover:text-foreground">
+          Home
+        </Link>
+        {" / "}
         <Link href="/tools" className="hover:text-foreground">
           Tools
         </Link>
@@ -28,6 +36,8 @@ export function ToolPageLayout({
             </Link>
           </>
         )}
+        {" / "}
+        <span aria-current="page">{tool.title}</span>
       </nav>
 
       <div className="tool-heading mb-2 flex flex-wrap items-start justify-between gap-3">
@@ -49,6 +59,7 @@ export function ToolPageLayout({
       <div className="workspace-shell">{children}</div>
 
       <div className="prose-tool mt-12 max-w-3xl border-t border-border pt-8">{instructions}</div>
+      <RelatedTools slug={tool.slug} />
     </div>
   );
 }
