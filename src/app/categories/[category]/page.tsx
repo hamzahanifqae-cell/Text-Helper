@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { CATEGORIES, getCategory } from "@/lib/registry/categories";
-import { getToolsByCategory } from "@/lib/registry/tools";
+import { getTool, getToolsByCategory } from "@/lib/registry/tools";
 import { ToolCard } from "@/components/tools/tool-card";
 import { AdSlot } from "@/components/ads/ad-slot";
 import { JsonLd } from "@/components/seo/json-ld";
@@ -45,7 +45,15 @@ export default async function CategoryPage({ params }: { params: Promise<{ categ
         <span aria-current="page">{category.title}</span>
       </nav>
       <h1 className="section-heading">{category.title}</h1>
-      <p className="mt-2 max-w-2xl text-muted-foreground">{category.description}</p>
+      <p className="mt-2 max-w-2xl text-muted-foreground">{category.audience}</p>
+      <p className="mt-3 max-w-2xl text-sm leading-relaxed text-muted-foreground">{category.choose}</p>
+      {getTool(category.startSlug) ? (
+        <p className="mt-3 text-sm">
+          <Link href={`/tools/${category.startSlug}`} className="font-medium text-primary hover:underline">
+            Start with {getTool(category.startSlug)?.title}
+          </Link>
+        </p>
+      ) : null}
       <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {tools.map((tool) => (
           <ToolCard key={tool.slug} tool={tool} />

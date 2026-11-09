@@ -29,7 +29,7 @@ export async function GET() {
 export async function POST(request: NextRequest) {
   if (!isSmtpConfigured()) {
     return NextResponse.json(
-      { error: "The contact form is not configured on this server yet. Please use the published contact email instead." },
+      { error: "The contact form is not configured on this server yet, so this message was not sent." },
       { status: 503 }
     );
   }

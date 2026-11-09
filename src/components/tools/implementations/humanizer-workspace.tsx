@@ -19,7 +19,13 @@ export function HumanizerWorkspace() {
     <AIRewriteWorkspace
       toolSlug="ai-text-humanizer"
       taskId="humanize"
-      generateLabel="Humanize text"
+      generateLabel="Rewrite tone"
+      placeholder="Paste stiff or generic text…"
+      guidance={
+        <p>
+          This rewrites wording and tone. It does not check who wrote the text, and it does not bypass AI detectors.
+        </p>
+      }
       buildOptions={(protectedPhrases) => ({
         tone,
         strength,

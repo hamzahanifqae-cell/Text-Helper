@@ -38,24 +38,28 @@ export default function AboutPage() {
       <ul>
         <li>Our grammar checker is not a replacement for a professional proofreading tool - it catches a curated set of common issues and, optionally, AI-generated suggestions, not every possible error.</li>
         <li>The AI Writing Pattern Analysis tool is experimental. It reports writing-style signals, not a calibrated probability that text is AI-generated or human-written.</li>
-        <li>The AI Text Humanizer improves writing quality; it is not a tool for evading AI-content detectors, and we don&apos;t present it as one.</li>
+        <li>The Natural Tone Rewriter changes wording and tone. It is not a tool for evading AI-content detectors or misrepresenting authorship.</li>
         <li>Readability scores and keyword density are informational, not a guarantee of search ranking or audience comprehension.</li>
       </ul>
 
-      <h2 className="text-lg font-semibold">Who runs this site</h2>
-      {operatorConfig.name ? (
-        <p>
-          {siteConfig.name} is operated by {operatorConfig.name}. See the{" "}
-          <a href="/contact" className="text-primary underline">
-            Contact page
-          </a>{" "}
-          to get in touch.
-        </p>
-      ) : (
-        <p className="text-muted-foreground">
-          Operator details for this site have not been published yet.
-        </p>
-      )}
+      <h2 className="text-lg font-semibold">Who publishes this site</h2>
+      <p>
+        {siteConfig.name} is published by {siteConfig.publisherName}.
+        {operatorConfig.contactEmail ? (
+          <>
+            {" "}
+            Email{" "}
+            <a href={`mailto:${operatorConfig.contactEmail}`} className="text-primary underline">
+              {operatorConfig.contactEmail}
+            </a>
+            .
+          </>
+        ) : null}{" "}
+        <a href="/contact" className="text-primary underline">
+          Contact
+        </a>
+        .
+      </p>
     </div>
   );
 }

@@ -166,3 +166,30 @@ Sitemap `lastmod` for those three URLs is `2026-11-05T14:46:00.000Z`. The other 
 Checked locally after the edit: lint, typecheck, 139 unit tests, and a production build. The prerendered HTML for the three URLs contains the new notes and examples, the same titles, and canonicals on `https://texthelper.online` without a trailing slash.
 
 After the next deploy, in Search Console inspect those three URLs and request indexing. Then filter Performance by each page and read the queries. Change a title only if a query asks for something the page actually does and the current title hides it. The slash URLs should keep consolidating to the URLs without a slash.
+
+## AdSense and publisher pass, 9 November 2026
+
+This repository is the one deployed to `https://texthelper.online`. A live check on 9 November 2026 returned 200 for `/`, `/about`, `/contact`, `/privacy`, and `/ads.txt`. The live AdSense script uses `ca-pub-4998739298306378`. `ads.txt` is `google.com, pub-4998739298306378, DIRECT, f08c47fec0942fa0`. Those were left unchanged. The live privacy policy URL is `https://texthelper.online/privacy`. The fetched homepage HTML contained the AdSense script and did not contain a Funding Choices or `googlefc` script. Publish Google's European regulations message in AdSense → Privacy & messaging, then test in a fresh Chrome Incognito window at `https://texthelper.online/?fc=alwaysshow&fctype=gdpr` and one tool page with the same query. That preview was not run here because the message is not in the live HTML yet.
+
+The intended contact email was not added. It is waiting for confirmation that `hamzahanifadsense@gmail.com` is approved for public use and is monitored. About, Contact, Privacy, and Terms name Hamza Hanif and link to `/contact`. They do not show an email address.
+
+The contact form is still the delivery path. The page asks `/api/contact` at request time, so a static build no longer hides the form when mail is configured only on the server. SMTP was not test-sent from here. Until mail works, the page says the message was not sent. The API returns that same fact with HTTP 503.
+
+Privacy now states that third-party vendors, including Google, use cookies to serve ads based on earlier visits, that Google's advertising cookies help Google and its partners select ads, and links to `https://myadcenter.google.com/`. No other ad vendor is configured. The footer and privacy page include Ad privacy choices. The button calls `googlefc.showRevocationMessage` only when Google has already defined it. If it is missing, the button says so and links to Google Ad Center. It does not create `window.googlefc` or load a second consent script.
+
+The site has 13 categories and 32 tools, not 35. Seven categories contain one tool: grammar, natural tone, summarization, writing analysis, cleanup, case, and lists. They stay, with a note on who they help and which tool to open. Removing one from the sitemap would not remove it from Google's index. Retiring one later needs a 301 from `/categories/<id>` to its tool URL, then an update to internal links.
+
+`/tools/ai-text-humanizer` keeps its URL. The visible name is now Natural Tone Rewriter. The prompt already forbids detector-evasion claims, and the page says it does not bypass detectors or decide authorship. AI Writing Pattern Analysis stays experimental and still refuses an authorship percentage. Its on-site keywords no longer say "ai detector".
+
+The three priority tool pages were checked again and left as written on 5 November. No page-filtered queries were provided.
+
+Groq tasks, live calls with the sentence "The report was reviewed by the team on Monday." on 9 November 2026: humanize, paraphrase, simplify, shorten, tone-change, formal-informal, active-voice, flow-consistency, inclusive-language, headline-generator, conclusion-generator, outline-generator, summarize, grammar-deep, and ai-pattern-commentary returned text. Expand returned text when allowed 1024 output tokens. Introduction-generator returned an empty message on two tries, including one at 1024 tokens, and a separate direct call with the same model then returned text. An empty model message is now a visible provider error instead of a blank result. Missing configuration, timeout, rate limit, quota, and secret-leak cases are covered by the existing mocked route tests, not by the live calls.
+
+Local checks after this pass: lint, typecheck, 139 unit tests, and a production build. The built About and Contact pages include "Hamza Hanif" and `/contact`, and they do not include the pending email. The built privacy page links to Google Ad Center. The built sitemap has 51 URLs: 32 tools and 13 categories.
+
+Still for you, after you confirm the email and deploy:
+
+1. Say the email is approved and monitored. It can then be shown as text and a `mailto` link on About and Contact.
+2. Confirm SMTP on the server with one real test message, or leave the form in its current "not sent" state.
+3. Publish the European regulations message in AdSense, then run the `fc=alwaysshow&fctype=gdpr` preview and use Ad privacy choices to reopen it.
+4. Deploy this build. It is not uploaded.

@@ -38,6 +38,12 @@ export class GroqProvider implements AIProvider {
       );
 
       const text = completion.choices[0]?.message?.content ?? "";
+      if (!text.trim()) {
+        throw new AIProviderError(
+          "The AI provider returned an empty result. Try again, or use a shorter passage.",
+          "provider_error",
+        );
+      }
       return {
         text,
         inputTokens: completion.usage?.prompt_tokens,
@@ -80,10 +86,14 @@ function translateGroqError(err: unknown, signal?: AbortSignal): AIProviderError
     );
   }
   if (anyErr?.name === "APIConnectionTimeoutError" || anyErr?.code === "ETIMEDOUT") {
-    return new AIProviderError("The AI provider took too long to respond.", "timeout");
+    return new AIProviderError(
+      "The AI provider took too long to respond. Wait a moment and try again, or use a shorter passage.",
+      "timeout"
+    );
   }
+  // Do not forward the provider's raw message. It can include request details.
   return new AIProviderError(
-    anyErr?.message ?? "The AI provider returned an unexpected error.",
+    "The AI provider could not complete this request. Wait a moment and try again.",
     "provider_error"
   );
 }

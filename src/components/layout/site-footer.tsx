@@ -1,5 +1,7 @@
 import Link from "next/link";
 import { Logo } from "@/components/brand/logo";
+import { AdPrivacyChoices } from "@/components/privacy/ad-privacy-choices";
+import { adsenseConfig } from "@/lib/config/site";
 import { CATEGORIES } from "@/lib/registry/categories";
 
 export function SiteFooter() {
@@ -52,6 +54,7 @@ export function SiteFooter() {
             <li><Link href="/about" className="text-sm text-muted-foreground hover:text-foreground">About</Link></li>
             <li><Link href="/contact" className="text-sm text-muted-foreground hover:text-foreground">Contact</Link></li>
             <li><Link href="/privacy" className="text-sm text-muted-foreground hover:text-foreground">Privacy</Link></li>
+            {adsenseConfig.enabled ? <li><AdPrivacyChoices /></li> : null}
             <li><Link href="/terms" className="text-sm text-muted-foreground hover:text-foreground">Terms</Link></li>
           </ul>
         </div>

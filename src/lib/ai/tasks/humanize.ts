@@ -23,7 +23,7 @@ const STRENGTH_DESCRIPTIONS: Record<number, string> = {
 
 export const humanizeTask = definePlainTextTask<HumanizeOptions>({
   id: "humanize",
-  label: "AI Text Humanizer",
+  label: "Natural Tone Rewriter",
   optionsSchema: humanizeOptionsSchema,
   buildPrompt(text, options) {
     const preserveList: string[] = [];

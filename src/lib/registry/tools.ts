@@ -22,7 +22,7 @@ export const TOOLS: ToolMeta[] = [
   { slug: "grammar-checker", title: "Grammar Checker", shortDescription: "Spelling, punctuation, repeated-word, and US/UK checks, plus optional deeper AI suggestions.", category: "grammar", kind: "local", icon: "SpellCheck", popular: true, keywords: ["spell check", "proofread"] },
 
   // Humanizer
-  { slug: "ai-text-humanizer", title: "AI Text Humanizer", shortDescription: "Rewrite stiff or AI-sounding text with more natural wording and tone.", category: "humanizer", kind: "ai", icon: "Sparkles", popular: true, keywords: ["humanize ai text", "natural writing"] },
+  { slug: "ai-text-humanizer", title: "Natural Tone Rewriter", shortDescription: "Rewrite stiff or generic wording into a clearer, more natural tone.", category: "humanizer", kind: "ai", icon: "Sparkles", popular: true, keywords: ["natural tone", "rewrite wording"] },
 
   // Rewriting assistants
   { slug: "paraphrasing-tool", title: "Paraphrasing Tool", shortDescription: "Reword text while keeping the same meaning.", category: "rewriting", kind: "ai", icon: "Repeat", popular: true, keywords: ["paraphrase", "reword"] },
@@ -43,7 +43,7 @@ export const TOOLS: ToolMeta[] = [
   { slug: "text-summarizer", title: "Text Summarizer", shortDescription: "Summarize text as a paragraph, bullet list, or key points.", category: "summarization", kind: "ai", icon: "FileText", popular: true, keywords: ["summarize", "tldr"] },
 
   // AI detection (experimental)
-  { slug: "ai-writing-pattern-analysis", title: "AI Writing Pattern Analysis", shortDescription: "Experimental writing-style signals - not an AI-authorship verdict.", category: "ai-detection", kind: "local", icon: "Microscope", experimental: true, keywords: ["ai detector", "ai content detector"] },
+  { slug: "ai-writing-pattern-analysis", title: "AI Writing Pattern Analysis", shortDescription: "Experimental writing-style signals. Not an authorship or AI-detection verdict.", category: "ai-detection", kind: "local", icon: "Microscope", experimental: true, keywords: ["writing style", "sentence variation"] },
 
   // Readability
   { slug: "readability-checker", title: "Readability Checker", shortDescription: "Flesch, Flesch-Kincaid, and Gunning Fog scores with explanations.", category: "readability", kind: "local", icon: "BookOpen", keywords: ["flesch score", "readability"] },

@@ -26,7 +26,7 @@ export default function TermsPage() {
         <li>Grammar, spelling, and readability tools use heuristics and AI assistance; they will miss some issues and occasionally flag non-issues.</li>
         <li>AI-generated rewrites, summaries, and other AI tool output may contain mistakes and should be reviewed before use.</li>
         <li>The AI Writing Pattern Analysis tool does not determine, and must not be treated as proof of, whether text was written by a human or an AI.</li>
-        <li>The AI Text Humanizer is a writing-quality tool; it is not a guarantee of evading any AI-content detector, and we make no claim that its output will do so.</li>
+        <li>The Natural Tone Rewriter changes wording and tone. It does not bypass AI-content detectors or determine authorship.</li>
       </ul>
 
       <h2 className="text-lg font-semibold">Acceptable use</h2>
@@ -47,9 +47,11 @@ export default function TermsPage() {
 
       <h2 className="text-lg font-semibold">Contact</h2>
       <p>
+        {siteConfig.name} is published by {siteConfig.publisherName}.{" "}
         {operatorConfig.contactEmail
           ? `Questions about these terms can be sent to ${operatorConfig.contactEmail}.`
-          : "Operator contact details for this site have not been published yet."}
+          : "A public email address is not listed yet. Use the Contact page when mail delivery is available."}{" "}
+        <a href="/contact" className="text-primary underline">Contact</a>.
       </p>
     </div>
   );

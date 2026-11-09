@@ -15,14 +15,18 @@ export default function Page() {
         <>
           <h2>How it works</h2>
           <p>
-            Paste text, choose a tone and rewrite strength, and click Humanize text. The AI rewrites it with
-            more natural wording and less repetitive or generic phrasing, while trying to preserve meaning,
-            facts, and anything you&apos;ve marked as protected.
+            Paste text, choose a tone and rewrite strength, and click Rewrite tone. The tool asks Groq to
+            rewrite stiff or generic wording while keeping the same points. Quotes, citations, and phrases
+            you mark as protected are requested to stay as written.
           </p>
-          <h2>What this is - and isn&apos;t</h2>
+          <h2>Example</h2>
+          <p>Stiff input: &quot;It is important to note that the meeting was conducted in order to facilitate discussion of the proposal.&quot;</p>
+          <p>A conversational rewrite of that sentence: &quot;The meeting was held so we could discuss the proposal.&quot;</p>
+          <p>This pair shows the kind of change the instruction requests. The generated wording can differ.</p>
+          <h2>What this is</h2>
           <p>
-            This is a writing-quality improvement tool. It is <strong>not</strong> a tool for evading
-            AI-content detectors or hiding AI authorship, and we don&apos;t claim or imply that it does that.
+            This is a tone and wording editor. It does not bypass AI-content detectors, hide authorship, or
+            say whether a person or a model wrote the original text.
           </p>
           <h2>Limitations</h2>
           <ul>

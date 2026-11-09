@@ -73,7 +73,7 @@ export function categorySchema(category: Category, tools: ToolMeta[]) {
       {
         "@type": "CollectionPage",
         name: category.title,
-        description: category.description,
+        description: category.audience,
         url,
         isPartOf: { "@type": "WebSite", name: siteConfig.name, url: siteConfig.url },
         mainEntity: {
