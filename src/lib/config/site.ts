@@ -3,6 +3,7 @@ export const siteConfig = {
   tagline: "Your everyday text toolkit.",
   url: process.env.SITE_URL ?? "https://texthelper.online",
   publisherName: "Hamza Hanif",
+  contactEmail: "hamzahanifadsense@gmail.com",
   description:
     "TextHelper is a free toolkit for everyday text work: word and character counters, grammar and spelling checks, text cleanup, case conversion, and AI-assisted writing, rewriting, and summarizing tools.",
 };

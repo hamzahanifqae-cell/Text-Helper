@@ -1,4 +1,4 @@
-import { siteConfig, operatorConfig } from "@/lib/config/site";
+import { siteConfig } from "@/lib/config/site";
 import { TOOLS } from "@/lib/registry/tools";
 import { pageMetadata } from "@/lib/seo/metadata";
 
@@ -44,17 +44,11 @@ export default function AboutPage() {
 
       <h2 className="text-lg font-semibold">Who publishes this site</h2>
       <p>
-        {siteConfig.name} is published by {siteConfig.publisherName}.
-        {operatorConfig.contactEmail ? (
-          <>
-            {" "}
-            Email{" "}
-            <a href={`mailto:${operatorConfig.contactEmail}`} className="text-primary underline">
-              {operatorConfig.contactEmail}
-            </a>
-            .
-          </>
-        ) : null}{" "}
+        {siteConfig.name} is published by {siteConfig.publisherName}. Email{" "}
+        <a href={`mailto:${siteConfig.contactEmail}`} className="text-primary underline">
+          {siteConfig.contactEmail}
+        </a>
+        .{" "}
         <a href="/contact" className="text-primary underline">
           Contact
         </a>

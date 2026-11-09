@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { siteConfig, operatorConfig, adsenseConfig, analyticsConfig } from "@/lib/config/site";
+import { siteConfig, adsenseConfig, analyticsConfig } from "@/lib/config/site";
 import { TOOLS } from "@/lib/registry/tools";
 import { pageMetadata } from "@/lib/seo/metadata";
 import { AdPrivacyChoices } from "@/components/privacy/ad-privacy-choices";
@@ -71,13 +71,6 @@ export default function PrivacyPage() {
         <li>No submitted text is ever placed in a URL, and there are no public pages that expose anyone&apos;s tool input or output.</li>
       </ul>
 
-      <h2 className="text-lg font-semibold">Contact form</h2>
-      <p>
-        When the contact form is able to send mail, the name, email address, and message you submit are
-        received so the publisher can reply. If mail is not configured, the form says so and does not send
-        the message.
-      </p>
-
       <h2 className="text-lg font-semibold">Advertising</h2>
       {adsenseConfig.enabled ? (
         <>
@@ -123,21 +116,12 @@ export default function PrivacyPage() {
 
       <h2 className="text-lg font-semibold">Contact</h2>
       <p>
-        {siteConfig.name} is published by {siteConfig.publisherName}.{" "}
-        {operatorConfig.contactEmail ? (
-          <>
-            Questions about this policy can be sent to{" "}
-            <a href={`mailto:${operatorConfig.contactEmail}`} className="text-primary underline">
-              {operatorConfig.contactEmail}
-            </a>
-            .
-          </>
-        ) : (
-          <>
-            A public email address is not listed yet. Questions about this policy can be sent from the{" "}
-            <Link href="/contact" className="text-primary underline">Contact page</Link> once mail delivery is available.
-          </>
-        )}
+        {siteConfig.name} is published by {siteConfig.publisherName}. Questions about this policy can be
+        sent by email to{" "}
+        <a href={`mailto:${siteConfig.contactEmail}`} className="text-primary underline">
+          {siteConfig.contactEmail}
+        </a>
+        .
       </p>
     </div>
   );

@@ -1,5 +1,4 @@
-import { ContactPanel } from "@/components/contact/contact-panel";
-import { operatorConfig, siteConfig } from "@/lib/config/site";
+import { siteConfig } from "@/lib/config/site";
 import { pageMetadata } from "@/lib/seo/metadata";
 
 export const metadata = pageMetadata({
@@ -15,10 +14,13 @@ export default function ContactPage() {
       <p className="mt-2 max-w-xl text-muted-foreground">
         Questions, feedback, or a problem with a tool? {siteConfig.publisherName} publishes {siteConfig.name}.
       </p>
-
-      <div className="mt-8">
-        <ContactPanel contactEmail={operatorConfig.contactEmail} />
-      </div>
+      <p className="mt-8 max-w-xl">
+        Email{" "}
+        <a href={`mailto:${siteConfig.contactEmail}`} className="text-primary underline">
+          {siteConfig.contactEmail}
+        </a>
+        .
+      </p>
     </div>
   );
 }
