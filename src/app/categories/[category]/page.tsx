@@ -8,6 +8,7 @@ import { AdSlot } from "@/components/ads/ad-slot";
 import { JsonLd } from "@/components/seo/json-ld";
 import { pageMetadata } from "@/lib/seo/metadata";
 import { categorySchema } from "@/lib/seo/schema";
+import { adsenseConfig } from "@/lib/config/site";
 
 export function generateStaticParams() {
   return CATEGORIES.map((c) => ({ category: c.id }));
@@ -59,7 +60,7 @@ export default async function CategoryPage({ params }: { params: Promise<{ categ
           <ToolCard key={tool.slug} tool={tool} />
         ))}
       </div>
-      <AdSlot slot="category-bottom" className="mt-10" />
+      <AdSlot slot="category-bottom" className="mt-10" enabled={adsenseConfig.enabled} clientId={adsenseConfig.clientId} />
     </div>
   );
 }

@@ -8,7 +8,7 @@ import { ToolCard } from "@/components/tools/tool-card";
 import { ToolIcon } from "@/components/tools/tool-icon";
 import { AdSlot } from "@/components/ads/ad-slot";
 import { buttonVariants } from "@/components/ui/button";
-import { siteConfig } from "@/lib/config/site";
+import { adsenseConfig, siteConfig } from "@/lib/config/site";
 import { JsonLd } from "@/components/seo/json-ld";
 import { websiteSchema } from "@/lib/seo/schema";
 
@@ -89,7 +89,9 @@ export default function HomePage() {
         </div>
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">{popular.map(tool => <ToolCard key={tool.slug} tool={tool} />)}</div>
       </section>
-      <div className="container-page"><AdSlot slot="home-mid" className="py-6" /></div>
+      <div className="container-page">
+        <AdSlot slot="home-mid" className="py-6" enabled={adsenseConfig.enabled} clientId={adsenseConfig.clientId} />
+      </div>
 
       <section className="border-y border-border bg-muted/40">
         <div className="container-page py-12 sm:py-16">

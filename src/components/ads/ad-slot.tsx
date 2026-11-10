@@ -1,6 +1,5 @@
 "use client";
-import { useEffect, useRef } from "react";
-import { adsenseConfig } from "@/lib/config/site";
+import { useEffect, useState } from "react";
 
 declare global {
   interface Window {
@@ -8,38 +7,50 @@ declare global {
   }
 }
 
-// Renders nothing at all unless ADSENSE_ENABLED=true and a real
-// ADSENSE_CLIENT_ID are configured - there is no placeholder or fake ad
-// block shown by default. Intentionally only ever placed on informational
-// pages (home, category listings), never inside a tool's workspace: never
-// beside the editor, the processing/action button, copy/download controls,
-// or an error/empty/loading state.
-export function AdSlot({ slot, className }: { slot: string; className?: string }) {
-  const ref = useRef<HTMLModElement>(null);
-  const enabled = adsenseConfig.enabled && Boolean(adsenseConfig.clientId);
+// enabled and clientId come from the server render. Reading them from
+// process.env inside this client component made the server emit the ad
+// markup while the browser bundle saw an empty value and rendered nothing.
+export function AdSlot({
+  slot,
+  className,
+  enabled,
+  clientId,
+}: {
+  slot: string;
+  className?: string;
+  enabled: boolean;
+  clientId: string;
+}) {
+  const active = enabled && clientId.length > 0;
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    if (!enabled) return;
+    setMounted(true);
+  }, []);
+
+  useEffect(() => {
+    if (!mounted || !active) return;
     try {
       (window.adsbygoogle = window.adsbygoogle || []).push({});
     } catch {
       // AdSense script not loaded yet or blocked - fail silently, no error UI for an ad.
     }
-  }, [enabled]);
+  }, [mounted, active]);
 
-  if (!enabled) return null;
+  if (!active) return null;
 
   return (
     <div className={className} data-ad-container={slot}>
-      <ins
-        ref={ref}
-        className="adsbygoogle"
-        style={{ display: "block" }}
-        data-ad-client={adsenseConfig.clientId}
-        data-ad-slot={slot}
-        data-ad-format="auto"
-        data-full-width-responsive="true"
-      />
+      {mounted ? (
+        <ins
+          className="adsbygoogle"
+          style={{ display: "block" }}
+          data-ad-client={clientId}
+          data-ad-slot={slot}
+          data-ad-format="auto"
+          data-full-width-responsive="true"
+        />
+      ) : null}
     </div>
   );
 }
