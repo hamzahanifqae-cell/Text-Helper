@@ -21,13 +21,24 @@ export default function Page() {
           </p>
           <h2>Example</h2>
           <p>
-            Passive to active: &quot;The report was reviewed by the team.&quot; becomes &quot;The team reviewed the report.&quot;
+            Passive to active, from one run: &quot;The report was reviewed by the team on Monday.&quot; became
+            &quot;The team reviewed the report on Monday.&quot;
           </p>
           <p>
-            Already active: &quot;The team reviewed the report.&quot; stays &quot;The team reviewed the report.&quot;
+            Already active, from one run: &quot;The team reviewed the report on Monday.&quot; stayed &quot;The
+            team reviewed the report on Monday.&quot;
           </p>
+          <p>Another run can word the active sentence differently. Read it before you use it.</p>
           <p>
-            These pairs follow the instruction sent with your text. The generated wording can differ, so read the result before you use it.
+            If the sentence is active and you still want different wording, use the{" "}
+            <a href="/tools/paraphrasing-tool" className="text-primary underline">
+              Paraphrasing Tool
+            </a>
+            . For spelling and punctuation, use the{" "}
+            <a href="/tools/grammar-checker" className="text-primary underline">
+              Grammar Checker
+            </a>
+            .
           </p>
           <h2>Limitations</h2>
           <ul>

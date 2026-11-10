@@ -19,13 +19,25 @@ export default function Page() {
             contractions and slang. Make informal allows contractions and conversational wording.
           </p>
           <h2>Make formal</h2>
+          <p>One run of a short email:</p>
           <p>&quot;Hey, can you send me the notes? I can&apos;t make the meeting.&quot;</p>
-          <p>&quot;Could you send me the notes? I am unable to attend the meeting.&quot;</p>
+          <p>&quot;Could you please send me the notes? I will be unable to attend the meeting.&quot;</p>
           <h2>Make informal</h2>
+          <p>One run in the other direction:</p>
           <p>&quot;Please submit the report by Friday. I am unable to extend the deadline.&quot;</p>
-          <p>&quot;Please send the report by Friday. I can&apos;t extend the deadline.&quot;</p>
+          <p>&quot;Please get the report in by Friday—I can&apos;t push the deadline.&quot;</p>
+          <p>Another run can word these differently. Read the result before you send it.</p>
           <p>
-            These pairs follow the two instructions the buttons send. A generated result can be worded differently, so review it before you use it.
+            Both directions stay on this page. For a change that is not formal or informal, such as a friendlier
+            or more confident tone, use the{" "}
+            <a href="/tools/tone-changer" className="text-primary underline">
+              Tone Changer
+            </a>
+            . After a formal rewrite, the{" "}
+            <a href="/tools/grammar-checker" className="text-primary underline">
+              Grammar Checker
+            </a>{" "}
+            can catch spelling and punctuation.
           </p>
           <h2>Limitations</h2>
           <ul>

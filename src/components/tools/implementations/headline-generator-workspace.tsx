@@ -12,6 +12,13 @@ export function HeadlineGeneratorWorkspace() {
       toolSlug="headline-generator"
       taskId="headline-generator"
       generateLabel="Generate headlines"
+      placeholder="Paste a draft or a short topic…"
+      guidance={
+        <p>
+          Paste the draft, or a short topic that already states the facts you want in the headline. The
+          headlines stay inside that text.
+        </p>
+      }
       showDiff={false}
       showProtectedPhrases={false}
       buildOptions={() => ({ count })}
