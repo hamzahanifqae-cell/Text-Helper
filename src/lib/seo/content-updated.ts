@@ -11,9 +11,25 @@ export const TOOL_CONTENT_UPDATED: Record<string, Date> = {
   "conclusion-generator": new Date("2026-11-05T14:46:00.000Z"),
   "formal-informal-converter": new Date("2026-11-10T14:30:00.000Z"),
   "headline-generator": new Date("2026-11-10T14:30:00.000Z"),
-  "ai-text-humanizer": new Date("2026-11-09T00:00:00.000Z"),
-  "ai-writing-pattern-analysis": new Date("2026-11-09T00:00:00.000Z"),
+  "ai-text-humanizer": new Date("2026-11-18T00:00:00.000Z"),
+  "ai-writing-pattern-analysis": new Date("2026-11-18T00:00:00.000Z"),
+  "grammar-checker": new Date("2026-11-18T00:00:00.000Z"),
+  "paraphrasing-tool": new Date("2026-11-18T00:00:00.000Z"),
+  "find-and-replace": new Date("2026-11-18T00:00:00.000Z"),
+  "privacy-redactor": new Date("2026-11-18T00:00:00.000Z"),
+  "text-extractor": new Date("2026-11-18T00:00:00.000Z"),
+  "list-line-tools": new Date("2026-11-18T00:00:00.000Z"),
+  "readability-checker": new Date("2026-11-18T00:00:00.000Z"),
+  "html-escape-tool": new Date("2026-11-18T00:00:00.000Z"),
+  "url-encoder-decoder": new Date("2026-11-18T00:00:00.000Z"),
+  "text-compare": new Date("2026-11-18T00:00:00.000Z"),
+  "keyword-density-analyzer": new Date("2026-11-18T00:00:00.000Z"),
+  "markdown-editor": new Date("2026-11-18T00:00:00.000Z"),
+  "word-counter": new Date("2026-11-18T00:00:00.000Z"),
 };
 
 /** Pages whose visible copy changed on 9 November 2026. */
 export const PAGE_UPDATED_9_NOV = new Date("2026-11-09T00:00:00.000Z");
+
+/** About, Privacy, and related tool copy updated on 18 November 2026. */
+export const PAGE_UPDATED_18_NOV = new Date("2026-11-18T00:00:00.000Z");

@@ -14,9 +14,22 @@ export default function Page() {
       instructions={
         <>
           <h2>How it works</h2>
-          <p>Paste text and pick a type. Matches are found with pattern matching (regular expressions) and listed one per line, with duplicates removed for emails, URLs, and hashtags.</p>
+          <p>
+            Paste text and pick emails, URLs, hashtags, or numbers. Matches are found with pattern matching
+            and listed one per line. Emails, URLs, and hashtags are de-duplicated. Everything runs in your
+            browser.
+          </p>
+          <h2>Example</h2>
+          <p>
+            From &quot;Ping ada@example.com and visit https://example.com #launch&quot;, the email mode lists
+            <code>ada@example.com</code>, the URL mode lists <code>https://example.com</code>, and the
+            hashtag mode lists <code>#launch</code>.
+          </p>
           <h2>Limitations</h2>
-          <p>Pattern-based detection can occasionally miss unusual formats or pick up a false positive (e.g. a number that looks like part of a larger token). Review the results before relying on them.</p>
+          <p>
+            Pattern-based detection can miss unusual formats or pick up a false positive. Review the list
+            before relying on it.
+          </p>
         </>
       }
     >

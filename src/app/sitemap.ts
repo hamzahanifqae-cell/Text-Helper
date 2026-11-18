@@ -2,13 +2,18 @@ import type { MetadataRoute } from "next";
 import { TOOLS } from "@/lib/registry/tools";
 import { CATEGORIES } from "@/lib/registry/categories";
 import { siteConfig } from "@/lib/config/site";
-import { CONTENT_UPDATED, PAGE_UPDATED_9_NOV, TOOL_CONTENT_UPDATED } from "@/lib/seo/content-updated";
+import {
+  CONTENT_UPDATED,
+  PAGE_UPDATED_9_NOV,
+  PAGE_UPDATED_18_NOV,
+  TOOL_CONTENT_UPDATED,
+} from "@/lib/seo/content-updated";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const base = siteConfig.url;
   const policyPages = ["/about", "/contact", "/privacy", "/terms"].map((path) => ({
     url: `${base}${path}`,
-    lastModified: PAGE_UPDATED_9_NOV,
+    lastModified: path === "/about" || path === "/privacy" ? PAGE_UPDATED_18_NOV : PAGE_UPDATED_9_NOV,
     changeFrequency: "yearly" as const,
     priority: 0.4,
   }));
@@ -20,7 +25,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
   }));
   const categoryPages = CATEGORIES.map((c) => ({
     url: `${base}/categories/${c.id}`,
-    lastModified: PAGE_UPDATED_9_NOV,
+    lastModified:
+      c.id === "grammar" || c.id === "ai-detection" ? PAGE_UPDATED_18_NOV : PAGE_UPDATED_9_NOV,
     changeFrequency: "monthly" as const,
     priority: 0.7,
   }));

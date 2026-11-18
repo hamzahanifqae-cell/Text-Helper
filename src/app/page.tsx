@@ -110,7 +110,7 @@ export default function HomePage() {
           <div><p className="eyebrow mb-3"><ShieldCheck className="h-4 w-4" /> Clear by design</p><h2 className="section-heading">Know where<br />your text goes.</h2><Link href="/privacy" className="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-primary">How we handle your text <ArrowRight className="h-4 w-4" /></Link></div>
           <div className="grid gap-6 sm:grid-cols-2">
             <div><span className="tool-card-icon mb-4"><FileText className="h-5 w-5" /></span><h3 className="font-semibold">Instant tools stay local</h3><p className="mt-2 text-sm leading-relaxed text-muted-foreground">Counters, cleanup, and formatting run in your browser. Your text stays on your device.</p></div>
-            <div><span className="tool-card-icon mb-4"><WandSparkles className="h-5 w-5" /></span><h3 className="font-semibold">AI works when you ask</h3><p className="mt-2 text-sm leading-relaxed text-muted-foreground">Writing tools send submitted text to our AI provider. You’ll see a disclosure before you generate.</p></div>
+            <div><span className="tool-card-icon mb-4"><WandSparkles className="h-5 w-5" /></span><h3 className="font-semibold">AI works when you ask</h3><p className="mt-2 text-sm leading-relaxed text-muted-foreground">AI rewriting tools send submitted text to TextHelper&apos;s API, then Groq, only when you click generate. You’ll see a disclosure first.</p></div>
           </div>
         </div>
       </section>

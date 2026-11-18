@@ -14,9 +14,21 @@ export default function Page() {
       instructions={
         <>
           <h2>How it works</h2>
-          <p>Paste the original text on the left and the revised version on the right. Additions are highlighted in green, deletions in red with a strikethrough. Switch between word-level and line-level comparison depending on what you&apos;re comparing.</p>
-          <h2>Example use</h2>
-          <p>Reviewing edits between two drafts, or checking what an AI rewrite tool actually changed.</p>
+          <p>
+            Paste the original text on the left and the revised version on the right. Additions are
+            highlighted in green; deletions are red with a strikethrough. Switch between word-level and
+            line-level comparison. Everything runs in your browser.
+          </p>
+          <h2>Example</h2>
+          <p>
+            Original: &quot;The team reviewed the report.&quot; Revised: &quot;The team reviewed the final
+            report.&quot; Word mode highlights the added word &quot;final.&quot;
+          </p>
+          <h2>Limitations</h2>
+          <p>
+            Very large pastes can make the highlight hard to scan. Use line mode for long drafts when you care
+            about whole-line changes.
+          </p>
         </>
       }
     >

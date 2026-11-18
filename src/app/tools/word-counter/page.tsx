@@ -19,7 +19,7 @@ export default function Page() {
             without spaces. The comma and exclamation mark are characters, not words. <code>café 👍🏽</code> counts
             as 1 word and 6 characters with the space: the thumbs-up emoji is one character and is not a word.
             <code>你好世界</code> is 4 characters and 2 word-like segments in this counter, which may not match
-            how a reader of Chinese would divide it.
+            how a reader of Chinese would divide it. Counting stays in your browser.
           </p>
           <h2>How counting works</h2>
           <p>

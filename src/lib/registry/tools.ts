@@ -72,6 +72,28 @@ export const TOOLS: ToolMeta[] = [
   { slug: "url-encoder-decoder", title: "URL Encoder / Decoder", shortDescription: "Encode or decode URL components.", category: "formatting", kind: "local", icon: "Link2", keywords: ["url encode", "percent encoding"] },
 ];
 
+/** Local-first tools that can send text to Groq only after an explicit AI click. */
+export const OPTIONAL_AI_LOCAL_SLUGS = new Set([
+  "grammar-checker",
+  "ai-writing-pattern-analysis",
+]);
+
+export function isOptionalAiLocalTool(slug: string): boolean {
+  return OPTIONAL_AI_LOCAL_SLUGS.has(slug);
+}
+
+export function getPureLocalTools(): ToolMeta[] {
+  return TOOLS.filter((tool) => tool.kind === "local" && !OPTIONAL_AI_LOCAL_SLUGS.has(tool.slug));
+}
+
+export function getOptionalAiLocalTools(): ToolMeta[] {
+  return TOOLS.filter((tool) => OPTIONAL_AI_LOCAL_SLUGS.has(tool.slug));
+}
+
+export function getAiTools(): ToolMeta[] {
+  return TOOLS.filter((tool) => tool.kind === "ai");
+}
+
 export function getTool(slug: string): ToolMeta | undefined {
   return TOOLS.find((t) => t.slug === slug);
 }

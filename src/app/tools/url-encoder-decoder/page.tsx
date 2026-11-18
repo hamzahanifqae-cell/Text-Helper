@@ -14,9 +14,19 @@ export default function Page() {
       instructions={
         <>
           <h2>How it works</h2>
-          <p>Encode converts text into percent-encoded form safe for use in a URL component (via encodeURIComponent). Decode reverses valid percent-encoded text back to plain text.</p>
+          <p>
+            Encode converts text into percent-encoded form safe for a URL component (via
+            <code>encodeURIComponent</code>). Decode reverses valid percent-encoded text. Everything runs in
+            your browser.
+          </p>
+          <h2>Example</h2>
+          <p>
+            Encode turns <code>hello world &amp; you</code> into
+            <code>hello%20world%20%26%20you</code>. Use this for a query value or path segment, not for an
+            entire page URL that already has structure you want to keep.
+          </p>
           <h2>Limitations</h2>
-          <p>Decoding invalid percent-encoded sequences will show a clear error rather than guessing at the intended text.</p>
+          <p>Decoding invalid percent-encoded sequences shows an error instead of guessing.</p>
         </>
       }
     >

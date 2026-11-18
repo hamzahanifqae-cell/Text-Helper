@@ -15,16 +15,24 @@ export default function Page() {
         <>
           <h2>How it works</h2>
           <p>
-            Paste a paragraph or more and click Generate. The AI rewrites it with different wording and
-            sentence structure while keeping the same meaning and the same points, in the same order.
+            Paste a paragraph or more and click Generate. The request goes to TextHelper&apos;s API, which
+            forwards the text to Groq. The model rewrites with different wording and sentence structure while
+            keeping the same meaning and points, in the same order. Text is not sent while you type.
           </p>
-          <h2>Example use</h2>
-          <p>Reworking a sentence that sounds too close to a source, or getting an alternate way to phrase an idea.</p>
+          <h2>Example</h2>
+          <p>
+            Input: &quot;The committee approved the budget after a long discussion.&quot; One possible rewrite:
+            &quot;After a lengthy discussion, the committee approved the budget.&quot; Another run can word it
+            differently. Read the result before you use it.
+          </p>
           <h2>Limitations</h2>
           <ul>
-            <li>Paraphrased text can still carry meaning very close to the original - it is not a tool for disguising authorship.</li>
-            <li>Very short input (a few words) may come back nearly unchanged, since there isn&apos;t much to vary.</li>
-            <li>Review the result for accuracy before using it - the AI can occasionally drop a nuance.</li>
+            <li>
+              Paraphrased text can still be close in meaning to the original. This is not a tool for disguising
+              authorship.
+            </li>
+            <li>Very short input may come back nearly unchanged.</li>
+            <li>The model can drop a nuance. Check accuracy before publishing.</li>
           </ul>
         </>
       }

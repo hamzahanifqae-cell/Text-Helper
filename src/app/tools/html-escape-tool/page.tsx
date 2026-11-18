@@ -14,9 +14,21 @@ export default function Page() {
       instructions={
         <>
           <h2>How it works</h2>
-          <p>Escape converts characters like &lt;, &gt;, &amp;, and quotes into HTML entities so the text can be embedded safely inside HTML. Unescape reverses common HTML entities back to plain characters.</p>
-          <h2>Example use</h2>
-          <p>Preparing a code snippet or user-submitted text to display safely inside an HTML page.</p>
+          <p>
+            Escape converts characters like &lt;, &gt;, &amp;, and quotes into HTML entities so the text can
+            sit safely inside HTML. Unescape reverses common entities back to plain characters. Everything
+            runs in your browser.
+          </p>
+          <h2>Example</h2>
+          <p>
+            Escape turns <code>&lt;div class=&quot;note&quot;&gt;</code> into
+            <code>&amp;lt;div class=&amp;quot;note&amp;quot;&amp;gt;</code>. Unescape reverses that.
+          </p>
+          <h2>Limitations</h2>
+          <p>
+            This is for displaying text inside HTML, not for sanitizing a full page of markup that should still
+            render as HTML.
+          </p>
         </>
       }
     >

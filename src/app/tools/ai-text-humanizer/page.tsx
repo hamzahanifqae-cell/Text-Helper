@@ -15,9 +15,10 @@ export default function Page() {
         <>
           <h2>How it works</h2>
           <p>
-            Paste text, choose a tone and rewrite strength, and click Rewrite tone. The tool asks Groq to
-            rewrite stiff or generic wording while keeping the same points. Quotes, citations, and phrases
-            you mark as protected are requested to stay as written.
+            Paste text, choose a tone and rewrite strength, and click Rewrite tone. That request goes to
+            TextHelper&apos;s API, which forwards the text to Groq to rewrite stiff or generic wording while
+            keeping the same points. Quotes, citations, and phrases you mark as protected are requested to
+            stay as written. Text is not sent while you type.
           </p>
           <h2>Example</h2>
           <p>Stiff input: &quot;It is important to note that the meeting was conducted in order to facilitate discussion of the proposal.&quot;</p>

@@ -1,5 +1,9 @@
 import { siteConfig } from "@/lib/config/site";
-import { TOOLS } from "@/lib/registry/tools";
+import {
+  getAiTools,
+  getOptionalAiLocalTools,
+  getPureLocalTools,
+} from "@/lib/registry/tools";
 import { pageMetadata } from "@/lib/seo/metadata";
 
 export const metadata = pageMetadata({
@@ -9,8 +13,9 @@ export const metadata = pageMetadata({
 });
 
 export default function AboutPage() {
-  const localCount = TOOLS.filter((t) => t.kind === "local").length;
-  const aiCount = TOOLS.filter((t) => t.kind === "ai").length;
+  const pureLocalCount = getPureLocalTools().length;
+  const optionalAiCount = getOptionalAiLocalTools().length;
+  const aiCount = getAiTools().length;
 
   return (
     <div className="container-page max-w-2xl py-10 prose-tool">
@@ -24,10 +29,18 @@ export default function AboutPage() {
 
       <h2 className="text-lg font-semibold">How the tools work</h2>
       <p>
-        {localCount} tools run entirely in your browser using ordinary JavaScript - word counts, case
-        conversion, cleanup, comparisons, and similar utilities never leave your device. {aiCount} tools send
-        the text you submit to an external AI provider to generate a result; we disclose this before your
-        first AI request and explain what we retain on the{" "}
+        {pureLocalCount} tools run only in your browser. Counters, cleanup, case conversion, compare,
+        list tools, extraction, redaction, and formatting stay on your device.
+      </p>
+      <p>
+        {optionalAiCount} tools are local-first: Grammar Checker and AI Writing Pattern Analysis compute
+        their main results in the browser. They contact {siteConfig.name}&apos;s API, which forwards text to
+        Groq, only after you click the optional AI control. A short notice appears above that control before
+        the request.
+      </p>
+      <p>
+        {aiCount} tools send the text you submit to {siteConfig.name}&apos;s API, which forwards it to Groq,
+        when you click generate or rewrite. Text is not sent while you type. Details are on the{" "}
         <a href="/privacy" className="text-primary underline">
           Privacy page
         </a>
@@ -36,10 +49,23 @@ export default function AboutPage() {
 
       <h2 className="text-lg font-semibold">What we don&apos;t claim</h2>
       <ul>
-        <li>Our grammar checker is not a replacement for a professional proofreading tool - it catches a curated set of common issues and, optionally, AI-generated suggestions, not every possible error.</li>
-        <li>The AI Writing Pattern Analysis tool is experimental. It reports writing-style signals, not a calibrated probability that text is AI-generated or human-written.</li>
-        <li>The Natural Tone Rewriter changes wording and tone. It is not a tool for evading AI-content detectors or misrepresenting authorship.</li>
-        <li>Readability scores and keyword density are informational, not a guarantee of search ranking or audience comprehension.</li>
+        <li>
+          The Grammar Checker is not a replacement for a professional proofreading tool. Local checks catch
+          a curated set of common issues; the optional AI pass can suggest more, and neither catches every
+          error.
+        </li>
+        <li>
+          The AI Writing Pattern Analysis tool is experimental. It reports writing-style signals, not a
+          calibrated probability that text is AI-generated or human-written.
+        </li>
+        <li>
+          The Natural Tone Rewriter changes wording and tone. It is not a tool for evading AI-content
+          detectors or misrepresenting authorship.
+        </li>
+        <li>
+          Readability scores and keyword density are informational, not a guarantee of search ranking or
+          audience comprehension.
+        </li>
       </ul>
 
       <h2 className="text-lg font-semibold">Who publishes this site</h2>

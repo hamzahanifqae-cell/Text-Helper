@@ -14,11 +14,23 @@ export default function Page() {
       instructions={
         <>
           <h2>How it works</h2>
-          <p>Paste text to see the most frequent words, repeated multi-word phrases, and overall vocabulary variety (unique words / total words). Optionally check the occurrence count and density of a specific keyword or phrase.</p>
+          <p>
+            Paste text to see frequent words, repeated multi-word phrases, and vocabulary variety (unique
+            words divided by total words). You can also check the count and density of one keyword or phrase.
+            Everything runs in your browser.
+          </p>
+          <h2>Example</h2>
+          <p>
+            In a short product blurb that repeats &quot;shipping&quot; three times in 60 words, the density for
+            that word is 5%. That number describes the paste; it does not predict search ranking.
+          </p>
           <h2>Limitations</h2>
           <ul>
-            <li>Keyword density is not a guarantee of search ranking - modern search engines evaluate relevance far beyond simple word counts.</li>
-            <li>The common-words filter uses a general English stop-word list and may not suit every language or domain.</li>
+            <li>Keyword density is not a guarantee of search ranking.</li>
+            <li>
+              The common-words filter uses a general English stop-word list and may not suit every language or
+              domain.
+            </li>
           </ul>
         </>
       }

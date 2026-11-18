@@ -24,7 +24,7 @@ export const CATEGORIES: Category[] = [
     title: "Grammar & Spelling",
     description: "Catch common mistakes, with optional AI suggestions.",
     audience: "Anyone proofreading a draft before they send it.",
-    choose: "This category has one tool. The checks for spelling, repeated words, and US/UK spelling run in the browser. The deeper suggestions run only after you ask for them.",
+    choose: "This category has one tool. Spelling, repeated words, punctuation, and US/UK checks run in the browser. Deeper AI suggestions run only after you click that control; a short notice appears first.",
     startSlug: "grammar-checker",
   },
   {
@@ -56,7 +56,7 @@ export const CATEGORIES: Category[] = [
     title: "AI Writing Analysis",
     description: "Experimental writing-style signals. Not an authorship verdict.",
     audience: "People who want descriptive statistics about a draft, such as sentence-length variation.",
-    choose: "This category has one tool. It reports style signals in the browser. An optional explanation can be requested afterward. It does not give an AI-written percentage or an authorship verdict.",
+    choose: "This category has one tool. Style statistics run in the browser. Optional AI commentary runs only after you click that control; a short notice appears first. It does not give an AI-written percentage or an authorship verdict.",
     startSlug: "ai-writing-pattern-analysis",
   },
   {

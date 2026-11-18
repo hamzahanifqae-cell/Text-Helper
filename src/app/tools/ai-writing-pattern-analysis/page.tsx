@@ -15,23 +15,34 @@ export default function Page() {
         <>
           <h2>How it works</h2>
           <p>
-            Paste text to see a set of writing-style statistics computed instantly in your browser - sentence
-            length variation, vocabulary variety, transition-word use, and repeated sentence openings. You can
-            optionally ask an AI model to explain those statistics in plain language.
+            Paste text to see writing-style statistics computed in your browser: sentence count, average
+            sentence length, sentence-length variation, vocabulary variety, transition-word density, and
+            repeated sentence openings. Those numbers stay on your device.
           </p>
-          <h2>Why there&apos;s no &quot;AI-generated&quot; percentage</h2>
           <p>
-            We looked for a suitably licensed, independently-evaluated AI-authorship detector that would fit
-            this project&apos;s free-tier and low-memory hosting constraints, and didn&apos;t find one we were
-            willing to present as reliable. Rather than ask a general-purpose AI model to invent a confidence
-            score - which would be a fabricated number dressed up as a measurement - this tool reports
-            descriptive writing-style signals instead, and is honest about not being an authorship detector.
+            Optionally, click <strong>Get AI commentary</strong>. That control sends the current text and the
+            computed statistics to TextHelper&apos;s API, which forwards them to Groq for a plain-language
+            explanation. A short notice appears above the button before you click. Text is not sent while you
+            type.
+          </p>
+          <h2>Example</h2>
+          <p>
+            A short uniform paragraph can show low sentence-length variation and repeated openings such as
+            &quot;The &quot;. That is a descriptive signal about rhythm, not proof that a person or a model
+            wrote the text.
+          </p>
+          <h2>Why there is no AI-generated percentage</h2>
+          <p>
+            This tool does not produce a calibrated probability that text is AI-generated or human-written.
+            Presenting a made-up confidence score as a measurement would be dishonest. The optional commentary
+            is instructed not to invent an authorship percentage; if one appears, it is removed before you see
+            the result.
           </p>
           <h2>Limitations</h2>
           <ul>
-            <li>These signals are descriptive, not diagnostic - human writing can be uniform, and AI writing can be highly varied.</li>
-            <li>Short text produces less reliable statistics - these metrics work best on at least a few paragraphs.</li>
-            <li>Never use this tool&apos;s output as proof that a piece of text was or wasn&apos;t written by an AI.</li>
+            <li>These signals are descriptive, not diagnostic. Human writing can be uniform; AI writing can vary.</li>
+            <li>Short text produces weaker statistics. A few paragraphs work better than a single sentence.</li>
+            <li>Do not use this output as proof of authorship.</li>
           </ul>
         </>
       }

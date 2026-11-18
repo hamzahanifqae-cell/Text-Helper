@@ -1,16 +1,19 @@
 import { Info, AlertTriangle } from "lucide-react";
 import Link from "next/link";
+import { siteConfig } from "@/lib/config/site";
 
 export function AIDisclosureNote() {
   return (
     <p className="flex items-start gap-2 text-xs text-muted-foreground">
       <Info className="mt-0.5 h-3.5 w-3.5 shrink-0" />
-      Clicking the button below sends your text to Groq, our AI provider, to generate a result. It is not
-      sent automatically as you type.{" "}
-      <Link href="/privacy" className="underline hover:text-foreground">
-        Learn how we handle this
-      </Link>
-      .
+      <span>
+        Clicking the button below sends your text to {siteConfig.name}&apos;s API for this request, and that
+        request is forwarded to Groq. It is not sent while you type.{" "}
+        <Link href="/privacy" className="underline hover:text-foreground">
+          Learn how we handle this
+        </Link>
+        .
+      </span>
     </p>
   );
 }
